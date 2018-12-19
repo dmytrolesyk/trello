@@ -1,9 +1,12 @@
 const createCardColumn = (function(){
-	const createEventListeners = require('./createEventListeners.js');
-	let columnsIdCounter = 1;
-	let cardsIdCounter = 1;
 
-	const newCard = function(e) {
+
+	const createEventListeners = require('./createEventListeners.js');
+	const events = [{eventName: "click", eventHandler:newCard},{eventName: "contextmenu", eventHandler:newColumn}]
+	let columnsIdCounter = 0;
+	let cardsIdCounter = 0;
+
+	function newCard(e) {
 
 		let clonedCard = e.target.cloneNode();
 		cardsIdCounter = ++cardsIdCounter;
@@ -34,7 +37,7 @@ const createCardColumn = (function(){
 		data[parentColumnIndex].cards.push(cardObj);
 	}
 
-	const newColumn = function(e){
+	function newColumn(e){
 
 		e.preventDefault();
 

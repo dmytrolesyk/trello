@@ -3,23 +3,13 @@
 	require('../css/style.css');
 	const whenDataReceived = require('./fetchData.js');
 	const buildTree = require('./buildTree.js');
-	const createCardColumn = require('./createCardColumn.js');
-	const events = [];
-	events.push(
-	{
-		eventName: "click",
-		eventHandler: createCardColumn.newCard
-	});
-	events.push(
-	{
-		eventName: "contextmenu",
-		eventHandler: createCardColumn.newColumn
-	});
+	const events = require('./events.js');
 
 
 		whenDataReceived('serverData.json').then(function(data){
 
 				buildTree(data, events);
+	
 		});
 	
 })();
