@@ -3,6 +3,7 @@ const createCardColumn = (function(){
 
 	const createEventListeners = require('./createEventListeners.js');
 	const events = [{eventName: "click", eventHandler:newCard},{eventName: "contextmenu", eventHandler:newColumn}]
+
 	let columnsIdCounter = 0;
 	let cardsIdCounter = 0;
 
