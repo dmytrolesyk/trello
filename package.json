@@ -1,0 +1,27 @@
+{
+  "name": "Trello",
+  "version": "1.0.0",
+  "description": "Trello project",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack --mode=development",
+    "trello": "live-server"
+  },
+  "author": "Dmytro Lesyk",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^2.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "live-server": "^1.2.1"
+  }
+}
