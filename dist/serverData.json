@@ -1,10 +1,10 @@
 [
 	{
-		"columnId": 0,
+		"columnId": "column-0",
 		"columnTitle": "column-0",
 		"cards": [
 			{
-				"cardId": 0,
+				"cardId": "card-0",
 				"cardTitle": "card-0"
 			}
 		]

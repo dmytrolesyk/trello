@@ -3,3 +3,5 @@ function cleanTree() {
 	container.innerHTML = '';
 
 }
+
+module.exports = cleanTree;

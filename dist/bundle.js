@@ -3891,7 +3891,7 @@ eval("\nvar content = __webpack_require__(/*! !../../node_modules/css-loader/dis
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n(function () {\n\n\t__webpack_require__(/*! ../css/style.css */ \"./src/css/style.css\");\n\tvar whenDataReceived = __webpack_require__(/*! ./fetchData.js */ \"./src/js/fetchData.js\");\n\tvar buildTree = __webpack_require__(/*! ./buildTree.js */ \"./src/js/buildTree.js\");\n\tvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\n\n\twhenDataReceived('serverData.json').then(function (data) {\n\n\t\tbuildTree(data, events);\n\t});\n})();\n\n//# sourceURL=webpack:///./src/js/app.js?");
+eval("\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\n(function () {\n\n\t__webpack_require__(/*! ../css/style.css */ \"./src/css/style.css\");\n\tvar whenDataReceived = __webpack_require__(/*! ./fetchData.js */ \"./src/js/fetchData.js\");\n\tvar buildTree = __webpack_require__(/*! ./buildTree.js */ \"./src/js/buildTree.js\");\n\tvar serviceData = __webpack_require__(/*! ./service.js */ \"./src/js/service.js\");\n\tvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\n\tvar fillEventsArray = __webpack_require__(/*! ./fillEventsService.js */ \"./src/js/fillEventsService.js\");\n\n\tfillEventsArray();\n\n\twhenDataReceived('serverData.json').then(function (data) {\n\n\t\tserviceData.push.apply(serviceData, _toConsumableArray(data));\n\t\tbuildTree(serviceData, events);\n\t});\n})();\n\n//# sourceURL=webpack:///./src/js/app.js?");
 
 /***/ }),
 
@@ -3903,7 +3903,19 @@ eval("\n\n(function () {\n\n\t__webpack_require__(/*! ../css/style.css */ \"./sr
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar createEventListeners = __webpack_require__(/*! ./createEventListeners.js */ \"./src/js/createEventListeners.js\");\nvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\n\nfunction buildTree(data, events) {\n\tfor (var i = 0; i < data.length; i++) {\n\t\tif (!data[i].cards.length) continue;\n\t\tvar column = document.createElement('div');\n\t\tcolumn.classList.add('column');\n\t\tcolumn.id = data[i].columnId;\n\n\t\tfor (var y = 0; y < data[i].cards.length; y++) {\n\t\t\tvar card = document.createElement('a');\n\t\t\tcard.classList.add('card');\n\t\t\tcard.id = data[i].cards[y].cardId;\n\t\t\tcreateEventListeners(events, card);\n\t\t\tcard.innerHTML = 'Title: ' + data[i].cards[y].cardTitle;\n\t\t\tcolumn.appendChild(card);\n\t\t}\n\n\t\tdocument.getElementById('flex-container').appendChild(column);\n\t\treturn card;\n\t}\n}\n\nmodule.exports = buildTree;\n\n//# sourceURL=webpack:///./src/js/buildTree.js?");
+eval("\n\nvar createEventListeners = __webpack_require__(/*! ./createEventListeners.js */ \"./src/js/createEventListeners.js\");\nvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\n\nfunction buildTree(data, events) {\n\tfor (var i = 0; i < data.length; i++) {\n\t\tif (!data[i].cards.length) {\n\t\t\tcontinue;\n\t\t};\n\t\tvar column = document.createElement('div');\n\t\tcolumn.classList.add('column');\n\t\tcolumn.id = data[i].columnId;\n\n\t\tfor (var y = 0; y < data[i].cards.length; y++) {\n\t\t\tvar card = document.createElement('a');\n\t\t\tcard.classList.add('card');\n\t\t\tcard.setAttribute(\"draggable\", \"true\");\n\t\t\tcard.id = data[i].cards[y].cardId;\n\t\t\tcreateEventListeners(events, card);\n\t\t\tcard.innerHTML = 'Title: ' + data[i].cards[y].cardTitle;\n\t\t\tcolumn.appendChild(card);\n\t\t}\n\n\t\tdocument.getElementById('flex-container').appendChild(column);\n\t}\n}\n\nmodule.exports = buildTree;\n\n//# sourceURL=webpack:///./src/js/buildTree.js?");
+
+/***/ }),
+
+/***/ "./src/js/cleanTree.js":
+/*!*****************************!*\
+  !*** ./src/js/cleanTree.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nfunction cleanTree() {\n\tvar container = document.getElementById(\"flex-container\");\n\tcontainer.innerHTML = '';\n}\n\nmodule.exports = cleanTree;\n\n//# sourceURL=webpack:///./src/js/cleanTree.js?");
 
 /***/ }),
 
@@ -3915,7 +3927,7 @@ eval("\n\nvar createEventListeners = __webpack_require__(/*! ./createEventListen
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar createCardColumn = function () {\n\n\t\tvar createEventListeners = __webpack_require__(/*! ./createEventListeners.js */ \"./src/js/createEventListeners.js\");\n\t\tvar events = [{ eventName: \"click\", eventHandler: newCard }, { eventName: \"contextmenu\", eventHandler: newColumn }];\n\n\t\tvar columnsIdCounter = 0;\n\t\tvar cardsIdCounter = 0;\n\n\t\tfunction newCard(e) {\n\n\t\t\t\tvar clonedCard = e.target.cloneNode();\n\t\t\t\tcardsIdCounter = ++cardsIdCounter;\n\t\t\t\tclonedCard.id = cardsIdCounter;\n\t\t\t\tclonedCard.setAttribute(\"draggable\", \"true\");\n\t\t\t\tcreateEventListeners(events, clonedCard);\n\t\t\t\tclonedCard.innerHTML = \"Title: card-\" + clonedCard.id;\n\t\t\t\te.target.parentElement.appendChild(clonedCard);\n\n\t\t\t\tvar parentColumnId = e.target.parentElement.id;\n\n\t\t\t\t//update array, find the index of the column where the new card was created\n\n\t\t\t\tfor (var i = 0; i < data.length; i++) {\n\t\t\t\t\t\tif (parentColumnId === data[i].columnId) {\n\t\t\t\t\t\t\t\tvar _parentColumnIndex = i;\n\t\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\t//create card object to be pushed to data array\n\n\t\t\t\tvar cardObj = {\n\t\t\t\t\t\tcardId: clonedCard.id,\n\t\t\t\t\t\tcardTitle: \"card-\" + clonedCard.id\n\t\t\t\t};\n\n\t\t\t\tdata[parentColumnIndex].cards.push(cardObj);\n\t\t}\n\n\t\tfunction newColumn(e) {\n\n\t\t\t\te.preventDefault();\n\n\t\t\t\tvar clonedColumn = e.target.parentElement.cloneNode();\n\t\t\t\tcolumnsIdCounter = ++columnsIdCounter;\n\t\t\t\tclonedColumn.id = columnsIdCounter;\n\n\t\t\t\tvar clonedCard = e.target.cloneNode(true);\n\t\t\t\tcardsIdCounter = ++cardsIdCounter;\n\t\t\t\tclonedCard.id = cardsIdCounter;\n\t\t\t\tclonedCard.setAttribute(\"draggable\", \"true\");\n\t\t\t\tcreateEventListeners(events, clonedCard);\n\t\t\t\tclonedCard.innerHTML = \"Title: card-\" + clonedCard.id;\n\n\t\t\t\tclonedColumn.appendChild(clonedCard);\n\t\t\t\tdocument.getElementById(\"flex-container\").appendChild(clonedColumn);\n\n\t\t\t\tvar cardObj = {\n\t\t\t\t\t\tcardId: clonedCard.id,\n\t\t\t\t\t\tcardTitle: \"card-\" + clonedCard.id\n\t\t\t\t};\n\n\t\t\t\tvar columnObj = {\n\t\t\t\t\t\tcolumnId: clonedColumn.id,\n\t\t\t\t\t\tcolumnTitle: \"column-\" + clonedColumn.id,\n\t\t\t\t\t\tcards: [cardObj]\n\t\t\t\t};\n\n\t\t\t\tdata.push(columnObj);\n\t\t}\n\n\t\treturn {\n\t\t\t\tnewCard: newCard,\n\t\t\t\tnewColumn: newColumn\n\t\t};\n}();\n\nmodule.exports = createCardColumn;\n\n//# sourceURL=webpack:///./src/js/createCardColumn.js?");
+eval("\n\nvar createCardColumn = function () {\n\n\tvar serviceData = __webpack_require__(/*! ./service.js */ \"./src/js/service.js\");\n\tvar createEventListeners = __webpack_require__(/*! ./createEventListeners.js */ \"./src/js/createEventListeners.js\");\n\tvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\n\n\tvar columnsIdCounter = 0;\n\tvar cardsIdCounter = 0;\n\n\tfunction newCard(e) {\n\n\t\tvar clonedCard = e.target.cloneNode();\n\t\tcardsIdCounter = ++cardsIdCounter;\n\t\tclonedCard.id = \"card-\" + cardsIdCounter;\n\t\tclonedCard.setAttribute(\"draggable\", \"true\");\n\t\tcreateEventListeners(events, clonedCard);\n\t\tclonedCard.innerHTML = 'Title: ' + clonedCard.id;\n\t\te.target.parentElement.appendChild(clonedCard);\n\n\t\tvar parentColumnId = e.target.parentElement.id;\n\n\t\t//update array, find the index of the column where the new card was created\n\n\t\tfor (var i = 0; i < serviceData.length; i++) {\n\t\t\tif (parentColumnId === serviceData[i].columnId) {\n\t\t\t\tvar parentColumnIndex = i;\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\n\t\t//create card object to be pushed to data array\n\n\t\tvar cardObj = {\n\t\t\tcardId: clonedCard.id,\n\t\t\tcardTitle: clonedCard.id };\n\n\t\tserviceData[parentColumnIndex].cards.push(cardObj);\n\t}\n\n\tfunction newColumn(e) {\n\n\t\te.preventDefault();\n\n\t\tvar clonedColumn = e.target.parentElement.cloneNode();\n\t\tcolumnsIdCounter = ++columnsIdCounter;\n\t\tclonedColumn.id = \"column-\" + columnsIdCounter;\n\n\t\tvar clonedCard = e.target.cloneNode(true);\n\t\tcardsIdCounter = ++cardsIdCounter;\n\t\tclonedCard.id = \"card-\" + cardsIdCounter;\n\t\tclonedCard.setAttribute(\"draggable\", \"true\");\n\t\tcreateEventListeners(events, clonedCard);\n\t\tclonedCard.innerHTML = 'Title: ' + clonedCard.id;\n\n\t\tclonedColumn.appendChild(clonedCard);\n\t\tdocument.getElementById(\"flex-container\").appendChild(clonedColumn);\n\n\t\tvar cardObj = {\n\t\t\tcardId: clonedCard.id,\n\t\t\tcardTitle: clonedCard.id\n\t\t};\n\n\t\tvar columnObj = {\n\t\t\tcolumnId: clonedColumn.id,\n\t\t\tcolumnTitle: clonedColumn.id,\n\t\t\tcards: [cardObj]\n\t\t};\n\n\t\tserviceData.push(columnObj);\n\t}\n\n\treturn {\n\t\tnewCard: newCard,\n\t\tnewColumn: newColumn\n\t};\n}();\n\nmodule.exports = createCardColumn;\n\n//# sourceURL=webpack:///./src/js/createCardColumn.js?");
 
 /***/ }),
 
@@ -3931,6 +3943,18 @@ eval("\n\nfunction createEventListeners(events, element) {\n\tevents.forEach(fun
 
 /***/ }),
 
+/***/ "./src/js/dragAndDrop.js":
+/*!*******************************!*\
+  !*** ./src/js/dragAndDrop.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar dnd = function () {\n\n\tvar serviceData = __webpack_require__(/*! ./service.js */ \"./src/js/service.js\");\n\tvar buildTree = __webpack_require__(/*! ./buildTree.js */ \"./src/js/buildTree.js\");\n\tvar cleanTree = __webpack_require__(/*! ./cleanTree.js */ \"./src/js/cleanTree.js\");\n\tvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\n\tvar dragSrcEl = null;\n\n\tfunction dragStart(e) {\n\n\t\te.target.classList.add(\"dragged\");\n\t\tsetTimeout(function () {\n\t\t\treturn e.target.classList.add(\"invisible\");\n\t\t}, 0.1);\n\n\t\tdragSrcEl = e.target;\n\t\te.dataTransfer.setData(\"text/html\", this.innerHTML);\n\t}\n\n\tfunction dragEnd(e) {\n\n\t\te.target.classList.remove(\"dragged\");\n\t\te.target.classList.remove(\"invisible\");\n\n\t\tvar cols = document.getElementsByClassName(\"column\");\n\t\t[].forEach.call(cols, function (col) {\n\t\t\tcol.classList.remove(\"over\");\n\t\t});\n\t}\n\n\tfunction dragEnter(e) {\n\n\t\te.target.parentElement.classList.add(\"over\");\n\t}\n\n\tfunction dragOver(e) {\n\n\t\te.preventDefault();\n\t}\n\n\tfunction dragLeave(e) {\n\n\t\te.target.parentElement.classList.remove(\"over\");\n\t}\n\n\tfunction dragDrop(e) {\n\n\t\tvar receivedData = e.dataTransfer.getData(\"text/html\");\n\n\t\tvar draggedCardId = dragSrcEl.id;\n\t\tvar draggedCardColumnId = dragSrcEl.parentElement.id;\n\n\t\t//find the index of the column of the card which is being dragged\n\t\tfor (var i = 0; i < serviceData.length; i++) {\n\t\t\tif (draggedCardColumnId === serviceData[i].columnId) {\n\t\t\t\tvar draggedCardColumnIndex = i;\n\t\t\t}\n\t\t}\n\n\t\t//find the index of the card being dragged\n\t\tfor (var _i = 0; _i < serviceData[draggedCardColumnIndex].cards.length; _i++) {\n\t\t\tif (draggedCardId === serviceData[draggedCardColumnIndex].cards[_i].cardId) {\n\t\t\t\tvar draggedCardIndex = _i;\n\t\t\t}\n\t\t}\n\n\t\t//delete the card object in the array in the column it's being dragged from, store its value in the variable\n\t\tvar draggedCardObject = serviceData[draggedCardColumnIndex].cards.splice(draggedCardIndex, 1)[0];\n\n\t\tvar droppedCardId = e.target.id;\n\t\tvar droppedCardColumnId = e.target.parentElement.id;\n\n\t\t//find the index of the column object of the card on which the dragged card is being dropped on\n\t\tfor (var _i2 = 0; _i2 < serviceData.length; _i2++) {\n\t\t\tif (droppedCardColumnId === serviceData[_i2].columnId) {\n\t\t\t\tvar droppedCardColumnIndex = _i2;\n\t\t\t}\n\t\t}\n\n\t\t//find the index of the card object on which the dragged card is being dropped on\n\t\tfor (var _i3 = 0; _i3 < serviceData[droppedCardColumnIndex].cards.length; _i3++) {\n\t\t\tif (droppedCardId === serviceData[droppedCardColumnIndex].cards[_i3].cardId) {\n\t\t\t\tvar droppedCardIndex = _i3;\n\t\t\t}\n\t\t}\n\n\t\t//insert the dragged card object into the new place\n\t\tserviceData[droppedCardColumnIndex].cards.splice(droppedCardIndex, 0, draggedCardObject);\n\n\t\tcleanTree();\n\t\tbuildTree(serviceData, events);\n\n\t\tdocument.getElementById(draggedCardId).innerHTML = receivedData;\n\t}\n\n\treturn {\n\n\t\tdragStart: dragStart,\n\t\tdragEnd: dragEnd,\n\t\tdragEnter: dragEnter,\n\t\tdragOver: dragOver,\n\t\tdragLeave: dragLeave,\n\t\tdragDrop: dragDrop\n\n\t};\n}();\n\nmodule.exports = dnd;\n\n//# sourceURL=webpack:///./src/js/dragAndDrop.js?");
+
+/***/ }),
+
 /***/ "./src/js/events.js":
 /*!**************************!*\
   !*** ./src/js/events.js ***!
@@ -3939,7 +3963,7 @@ eval("\n\nfunction createEventListeners(events, element) {\n\tevents.forEach(fun
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar createCardColumn = __webpack_require__(/*! ./createCardColumn.js */ \"./src/js/createCardColumn.js\");\nvar events = [{\n\teventName: \"click\",\n\teventHandler: createCardColumn.newCard\n}, {\n\teventName: \"contextmenu\",\n\teventHandler: createCardColumn.newColumn\n}];\n\nmodule.exports = events;\n\n//# sourceURL=webpack:///./src/js/events.js?");
+eval("\n\nvar events = [];\nmodule.exports = events;\n\n//# sourceURL=webpack:///./src/js/events.js?");
 
 /***/ }),
 
@@ -3952,6 +3976,30 @@ eval("\n\nvar createCardColumn = __webpack_require__(/*! ./createCardColumn.js *
 
 "use strict";
 eval("\n\nvar whenDataReceived = function () {\n\tvar _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {\n\t\tvar res;\n\t\treturn regeneratorRuntime.wrap(function _callee$(_context) {\n\t\t\twhile (1) {\n\t\t\t\tswitch (_context.prev = _context.next) {\n\t\t\t\t\tcase 0:\n\t\t\t\t\t\t_context.next = 2;\n\t\t\t\t\t\treturn fetch(url);\n\n\t\t\t\t\tcase 2:\n\t\t\t\t\t\tres = _context.sent;\n\t\t\t\t\t\t_context.next = 5;\n\t\t\t\t\t\treturn res.json();\n\n\t\t\t\t\tcase 5:\n\t\t\t\t\t\treturn _context.abrupt(\"return\", _context.sent);\n\n\t\t\t\t\tcase 6:\n\t\t\t\t\tcase \"end\":\n\t\t\t\t\t\treturn _context.stop();\n\t\t\t\t}\n\t\t\t}\n\t\t}, _callee, this);\n\t}));\n\n\treturn function whenDataReceived(_x) {\n\t\treturn _ref.apply(this, arguments);\n\t};\n}();\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nmodule.exports = whenDataReceived;\n\n//# sourceURL=webpack:///./src/js/fetchData.js?");
+
+/***/ }),
+
+/***/ "./src/js/fillEventsService.js":
+/*!*************************************!*\
+  !*** ./src/js/fillEventsService.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar events = __webpack_require__(/*! ./events.js */ \"./src/js/events.js\");\nvar createCardColumn = __webpack_require__(/*! ./createCardColumn.js */ \"./src/js/createCardColumn.js\");\nvar dnd = __webpack_require__(/*! ./dragAndDrop.js */ \"./src/js/dragAndDrop.js\");\n\nfunction fillEventsArray() {\n\n\tevents.push({ eventName: \"click\", eventHandler: createCardColumn.newCard });\n\tevents.push({ eventName: \"contextmenu\", eventHandler: createCardColumn.newColumn });\n\tevents.push({ eventName: \"dragstart\", eventHandler: dnd.dragStart });\n\tevents.push({ eventName: \"dragend\", eventHandler: dnd.dragEnd });\n\tevents.push({ eventName: \"dragenter\", eventHandler: dnd.dragEnter });\n\tevents.push({ eventName: \"dragleave\", eventHandler: dnd.dragLeave });\n\tevents.push({ eventName: \"dragover\", eventHandler: dnd.dragOver });\n\tevents.push({ eventName: \"drop\", eventHandler: dnd.dragDrop });\n}\n\nmodule.exports = fillEventsArray;\n\n//# sourceURL=webpack:///./src/js/fillEventsService.js?");
+
+/***/ }),
+
+/***/ "./src/js/service.js":
+/*!***************************!*\
+  !*** ./src/js/service.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar serviceData = [];\n\nmodule.exports = serviceData;\n\n//# sourceURL=webpack:///./src/js/service.js?");
 
 /***/ }),
 
