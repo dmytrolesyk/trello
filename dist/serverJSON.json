@@ -5,7 +5,10 @@
 		"cards": [
 			{
 				"cardId": "card-0",
-				"cardTitle": "card-0"
+				"cardTitle": "card-0",
+				"cardAuthor": "",
+				"cardDate": "",
+				"cardTextContent": ""
 			}
 		]
 	}

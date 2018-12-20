@@ -21,6 +21,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "fs": "0.0.1-security",
     "live-server": "^1.2.1"
   }
 }

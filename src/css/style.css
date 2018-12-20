@@ -4,6 +4,12 @@
 
 body {
 	margin: 0;
+	font-family: 'Raleway', sans-serif;
+}
+
+p {
+	padding: 0;
+	margin: 0;
 }
 
 
@@ -23,7 +29,7 @@ body {
  }
 
 .column {
-	flex: 0 0 300px;
+	flex: 0 0 400px;
 	overflow: hidden;
 	background: rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
@@ -32,10 +38,10 @@ body {
 }
 
 .card {
+
 	background-color: rgb(36, 155, 198);
-	display: block;
-	width: 250px;
-	height: 150px;
+	width: 350px;
+	height: 200px;
 	margin: 20px auto 20px auto;
 	border-radius: 8px;
 	padding: 15px 30px;
@@ -45,6 +51,8 @@ body {
 	text-decoration: none;
 	transition: .4s background-color;
 	overflow: hidden;
+	position: relative;
+	cursor: pointer;
 }
 
 .card:hover {
@@ -63,4 +71,5 @@ body {
 
 	background-color: rgba(36, 155, 198, 0.3);
 	border: 4px dashed blue;
+	cursor: grab;
 }

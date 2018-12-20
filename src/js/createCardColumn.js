@@ -1,20 +1,22 @@
 const createCardColumn = (function(){
 
+	
 	const serviceData = require('./service.js');
 	const createEventListeners = require('./createEventListeners.js');
 	const events = require('./events.js');
+	const createModalButton = require('./createModalButton.js');
 
 	let columnsIdCounter = 0;
 	let cardsIdCounter = 0;
 
 	function newCard(e) {
 
+		if (!(e.target.classList.contains('card'))) { return }
 		let clonedCard = e.target.cloneNode();
 		cardsIdCounter = ++cardsIdCounter;
 		clonedCard.id = "card-" + cardsIdCounter;
 		clonedCard.setAttribute("draggable", "true");
 		createEventListeners(events, clonedCard);
-		clonedCard.innerHTML = `Title: ${clonedCard.id}`;
 		e.target.parentElement.appendChild(clonedCard);
 
 		let parentColumnId = e.target.parentElement.id;
@@ -31,18 +33,32 @@ const createCardColumn = (function(){
 		//create card object to be pushed to data array
 
 		let cardObj = {
+
 			cardId: clonedCard.id,
-			cardTitle: clonedCard.id		}
+			cardTitle: clonedCard.id,
+			cardAuthor: "",
+			cardDate: "",
+			cardTextContent: ""
+
+		}
 
 		serviceData[parentColumnIndex].cards.push(cardObj);
 
+		clonedCard.innerHTML = `<h3>${cardObj.cardTitle}</h3>
+			<h4>${cardObj.cardAuthor}</h4>
+			<h4>${cardObj.cardDate}</h4>
+			<p>${cardObj.cardTextContent}<p>`;
+
+		createModalButton(clonedCard);
+
+		console.log(serviceData);
 	}
 
 
 	function newColumn(e) {
 
 		e.preventDefault();
-	
+		if (!(e.target.classList.contains('card'))) { return }
 
 		let clonedColumn = e.target.parentElement.cloneNode();
 		columnsIdCounter = ++columnsIdCounter;
@@ -59,9 +75,15 @@ const createCardColumn = (function(){
 		document.getElementById("flex-container").appendChild(clonedColumn);
 
 		let cardObj = {
+
 			cardId: clonedCard.id,
-			cardTitle: clonedCard.id
+			cardTitle: clonedCard.id,
+			cardAuthor: "",
+			cardDate: "",
+			cardTextContent: ""
+
 		}
+
 
 		let columnObj = {
 			columnId: clonedColumn.id,
@@ -70,6 +92,13 @@ const createCardColumn = (function(){
 		}
 
 		serviceData.push(columnObj);
+
+		clonedCard.innerHTML = `<h3>${cardObj.cardTitle}</h3>
+		<h4>${cardObj.cardAuthor}</h4>
+		<h4>${cardObj.cardDate}</h4>
+		<p>${cardObj.cardTextContent}<p>`;
+
+		createModalButton(clonedCard);
 
 	}
 	

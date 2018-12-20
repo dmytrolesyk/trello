@@ -9,9 +9,8 @@ const dnd = (function(){
 
 	function dragStart(e) {
 
-
 		e.target.classList.add("dragged");
-		setTimeout(()=> e.target.classList.add("invisible"), 0.1);
+		setTimeout(()=> this.classList.add("invisible"), 0.1);
 
 		dragSrcEl = e.target;
 		e.dataTransfer.setData("text/html", this.innerHTML);

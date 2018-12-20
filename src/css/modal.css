@@ -1,0 +1,88 @@
+.modal-opener {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	bottom: 15px;
+	display: flex;
+	justify-content: center;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+}
+
+.modal-opener .modal-opener-dot {
+	margin: 0 5px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	border: none;
+	background-color: rgba(255,255,255, 0.4);
+	transition: .3s background-color;
+	z-index: 5;
+}
+
+.modal-opener:hover {
+	cursor: pointer;
+}
+
+.modal-opener:hover .modal-opener-dot {
+	background-color: rgba(255,255,255, 0.8);
+}
+
+.modal-background {
+	display: none;
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.modal-window {
+	position: relative;
+	background-color: #f4f4f4;
+	border-radius: 8px;
+	margin: 20% auto;
+	padding: 25px;
+	width: 70%;
+	box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+	animation-name: modalwindow;
+	animation-duration: 1s;
+}
+
+@keyframes modalwindow {
+	from { opacity: 0 }
+	to { opacity: 1 }
+}
+
+.close-modal-button {
+	line-height: 0;
+	top: 15px;
+	right: 10px;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	color: #ccc;
+	float: right;
+	font-size: 35px;
+
+}
+
+.close-modal-button:hover, .close-modal-button:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-content h3 {
+	text-align: center;
+}
+
+.separator {
+	border-top: 2px solid rgba(36, 155, 198, 0.3);
+	width: 90%;
+
+}
