@@ -13,7 +13,6 @@ const dnd = (function(){
 		setTimeout(()=> this.classList.add("invisible"), 0.1);
 
 		dragSrcEl = e.target;
-		e.dataTransfer.setData("text/html", this.innerHTML);
 	}
 
 	function dragEnd(e) {
@@ -44,8 +43,6 @@ const dnd = (function(){
 	}
 
 	function dragDrop(e) {
-
-		const receivedData = e.dataTransfer.getData("text/html");
 
 		const draggedCardId = dragSrcEl.id;
 		const draggedCardColumnId = dragSrcEl.parentElement.id;
@@ -92,7 +89,6 @@ const dnd = (function(){
 		cleanTree();
 		buildTree(serviceData, events);
 
-		document.getElementById(draggedCardId).innerHTML = receivedData;
 
 	}
 
