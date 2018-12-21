@@ -9,6 +9,8 @@ const dnd = (function(){
 
 	function dragStart(e) {
 
+		if (!(e.target.classList.contains('card'))) { return }
+
 		e.target.classList.add("dragged");
 		setTimeout(()=> this.classList.add("invisible"), 0.1);
 
@@ -16,6 +18,8 @@ const dnd = (function(){
 	}
 
 	function dragEnd(e) {
+
+		if (!(e.target.classList.contains('card'))) { return }
 
 		e.target.classList.remove("dragged");
 		e.target.classList.remove("invisible");
@@ -29,20 +33,28 @@ const dnd = (function(){
 
 	function dragEnter(e) {
 
+		if (!(e.target.classList.contains('card'))) { return }
+
 		e.target.parentElement.classList.add("over");
 	}
 
 	function dragOver(e) {
+
+		if (!(e.target.classList.contains('card'))) { return }
 
 		e.preventDefault();
 	}
 
 	function dragLeave(e) {
 
+		if (!(e.target.classList.contains('card'))) { return }
+
 		e.target.parentElement.classList.remove("over");
 	}
 
 	function dragDrop(e) {
+
+		if (!(e.target.classList.contains('card'))) { return }
 
 		const draggedCardId = dragSrcEl.id;
 		const draggedCardColumnId = dragSrcEl.parentElement.id;
@@ -87,7 +99,7 @@ const dnd = (function(){
 		serviceData[droppedCardColumnIndex].cards.splice(droppedCardIndex, 0, draggedCardObject);
 
 		cleanTree();
-		buildTree(serviceData, events);
+		buildTree(serviceData, events, false);
 
 
 	}

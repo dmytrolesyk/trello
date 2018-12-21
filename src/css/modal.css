@@ -77,12 +77,78 @@
 	cursor: pointer;
 }
 
-.modal-content h3 {
+.modal-content h3, h4 {
 	text-align: center;
+}
+
+.modal-content {
+	padding: 0 20px;
 }
 
 .separator {
 	border-top: 2px solid rgba(36, 155, 198, 0.3);
 	width: 90%;
+	margin-bottom: 10px;
 
+}
+
+.modal-form {
+	padding: 0 10px;
+	overflow: hidden;
+}
+
+.input-holder {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.button-holder {
+	margin-bottom: 20px;
+}
+
+.button {
+	text-transform: capitalize;
+	display: inline-block;
+	vertical-align: top;
+	background-color: rgb(36, 155, 198);
+	width: 100%;
+	border-radius: 5px;
+	color: white;
+	padding: 10px 50px;
+	border: none;
+	text-align: center;
+	transition: .4s background-color;
+
+}
+
+.button:hover {
+	background-color: rgba(36, 155, 198, 0.5);
+	cursor: pointer;
+}
+
+
+[type='text'],
+textarea {
+	background-color: rgba(36, 155, 198, 0.1);
+	border: none;
+	outline: none;
+	padding: 10px 15px;
+	border-radius: 5px;
+	display: block;
+	width: 100%;
+	font-family: 'Raleway', sans-serif;
+	color: black;
+	font-size: 14px;
+
+}
+
+textarea {
+	resize: none;
+}
+
+[type='text']::placeholder,
+textarea::placeholder {
+	font-family: 'Raleway', sans-serif;
+	color: gray;
+	font-size: 14px;
 }

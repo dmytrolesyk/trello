@@ -1,8 +1,9 @@
 const createEventListeners = require('./createEventListeners.js');
 const createModalButton = require('./createModalButton.js');
 const events = require('./events.js');
+const formatDate = require('./formatDate.js');
 
-function buildTree(data, events) {
+function buildTree(data, events, calledFirstTime) {
 	for (let i = 0; i<data.length; i++) {
 
 	if(!(data[i].cards.length)) { continue} ;
@@ -11,6 +12,11 @@ function buildTree(data, events) {
 		column.id = data[i].columnId;
 
 		for (let y = 0; y < data[i].cards.length; y++) {
+
+			if ((!data[i].cards[y].cardDate) && (calledFirstTime)) {	
+				data[i].cards[y].cardDate = formatDate();
+			}
+			
 
 			var card = document.createElement('div');
 			card.classList.add('card');

@@ -14,7 +14,7 @@
 	whenDataReceived('serverJSON.json').then(data => {
 			
 			serviceData.push(...data);
-			buildTree(serviceData, events);
+			buildTree(serviceData, events, true);
 			
 	});
 

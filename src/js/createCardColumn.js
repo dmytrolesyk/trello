@@ -5,6 +5,7 @@ const createCardColumn = (function(){
 	const createEventListeners = require('./createEventListeners.js');
 	const events = require('./events.js');
 	const createModalButton = require('./createModalButton.js');
+	const formatDate = require('./formatDate.js');
 
 	let columnsIdCounter = 0;
 	let cardsIdCounter = 0;
@@ -37,7 +38,7 @@ const createCardColumn = (function(){
 			cardId: clonedCard.id,
 			cardTitle: clonedCard.id,
 			cardAuthor: "",
-			cardDate: "",
+			cardDate: formatDate(),
 			cardTextContent: ""
 
 		}
@@ -74,12 +75,13 @@ const createCardColumn = (function(){
 		clonedColumn.appendChild(clonedCard);
 		document.getElementById("flex-container").appendChild(clonedColumn);
 
+
 		let cardObj = {
 
 			cardId: clonedCard.id,
 			cardTitle: clonedCard.id,
 			cardAuthor: "",
-			cardDate: "",
+			cardDate: formatDate(),
 			cardTextContent: ""
 
 		}
