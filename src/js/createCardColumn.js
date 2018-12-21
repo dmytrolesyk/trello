@@ -51,8 +51,6 @@ const createCardColumn = (function(){
 			<p>${cardObj.cardTextContent}<p>`;
 
 		createModalButton(clonedCard);
-
-		console.log(serviceData);
 	}
 
 

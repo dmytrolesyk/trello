@@ -1,6 +1,5 @@
 const modal = (function() {
 
-    const buildTree = require('./buildTree.js');
     const cleanTree = require('./cleanTree.js');
     const serviceData = require('./service.js');
     const events = require('./events.js');
